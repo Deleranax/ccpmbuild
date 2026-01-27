@@ -1,0 +1,21 @@
+[package]
+name = "ccpmbuild"
+version = "0.1.0"
+edition = "2024"
+authors = ["Alexandre Leconte <aleconte@dwightstudio.fr>"]
+description = "Package building and repository management tool for ComputerCraft Package Manager (CCPM)"
+
+[dependencies]
+clap = "4.5.55"
+clap_derive = "4.5.55"
+darklua = "0.17.3"
+anyhow = "1.0.100"
+thiserror = "2.0.18"
+serde_json = "1.0.149"
+serde = { version = "1.0.228", features = ["derive"] }
+spdx = "0.13.3"
+deflate = "1.0.0"
+base64 = "0.22.1"
+sha2 = "0.11.0-rc.4"
+hex = "0.4.3"
+console = "0.16.2"
