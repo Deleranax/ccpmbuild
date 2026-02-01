@@ -200,11 +200,13 @@ fn build(
                 index::Package {
                     manifest: package.manifest.base,
                     versions,
+                    latest_version: package.manifest.version.clone(),
                 },
             );
         }
         Some(p) => {
             p.manifest = package.manifest.base;
+            p.latest_version = package.manifest.version.clone();
             p.versions.insert(package.manifest.version.clone(), version);
         }
     }

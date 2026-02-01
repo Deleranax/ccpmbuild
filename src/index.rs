@@ -9,6 +9,7 @@ pub struct Package {
     #[serde(flatten)]
     pub manifest: PackageBase,
     pub versions: HashMap<String, Version>,
+    pub latest_version: String,
 }
 
 #[derive(Serialize, Deserialize)]
