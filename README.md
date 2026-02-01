@@ -1,4 +1,9 @@
-# ccpmbuild
+# ccpmbuild 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Rust 2024](https://img.shields.io/badge/rust-2024%20edition-f74c00.svg?logo=rust&logoColor=white)](https://www.rust-lang.org)
+[![Built for CCPM](https://img.shields.io/badge/Built%20for-CCPM-orange.svg)](https://github.com/deleranax/ccpm)
+[![Container Image](https://img.shields.io/badge/container-ghcr.io-0db7ed.svg?logo=docker&logoColor=white)](https://ghcr.io/deleranax/ccpmbuild)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Deleranax/ccpmbuild/ci.yml?branch=main&label=build)](https://github.com/deleranax/ccpmbuild/actions)
 
 A powerful build tool and repository management system for [ComputerCraft Package Manager (CCPM)](https://github.com/deleranax/ccpm), written in Rust.
 
