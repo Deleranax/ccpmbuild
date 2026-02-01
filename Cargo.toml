@@ -1,6 +1,6 @@
 [package]
 name = "ccpmbuild"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2024"
 authors = ["Alexandre Leconte <aleconte@dwightstudio.fr>"]
 description = "Package building and repository management tool for ComputerCraft Package Manager (CCPM)"
@@ -19,3 +19,4 @@ base64 = "0.22.1"
 sha2 = "0.11.0-rc.4"
 hex = "0.4.3"
 console = "0.16.2"
+regex = "1.12.2"
