@@ -1,6 +1,6 @@
 [package]
 name = "ccpmbuild"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 authors = ["Alexandre Leconte <aleconte@dwightstudio.fr>"]
 description = "Package building and repository management tool for ComputerCraft Package Manager (CCPM)"

@@ -174,7 +174,7 @@ fn build(
 
     printfmt!("File", file);
 
-    let data = base64::prelude::BASE64_STANDARD.encode(deflate::deflate_bytes(
+    let data = base64::prelude::BASE64_STANDARD.encode(deflate::deflate_bytes_zlib(
         serde_json::to_string(&package)
             .map_err(Error::SerializePackage)?
             .as_bytes(),
