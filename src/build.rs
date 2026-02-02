@@ -138,37 +138,42 @@ fn build(
 
     // Walk source tree
     let base_source_path = input.join(crate::PACKAGES_SOURCE_DIR_NAME);
-    let mut stack = vec![base_source_path.clone()];
 
-    while let Some(src) = stack.pop() {
-        if src.is_dir() {
-            match fs::read_dir(src) {
-                Ok(dir) => stack.extend(dir.filter_map(Result::ok).map(|entry| entry.path())),
-                Err(e) => return Err(Error::ReadSourceDir(e)),
+    if base_source_path.exists() {
+        let mut stack = vec![base_source_path.clone()];
+
+        while let Some(src) = stack.pop() {
+            if src.is_dir() {
+                match fs::read_dir(src) {
+                    Ok(dir) => stack.extend(dir.filter_map(Result::ok).map(|entry| entry.path())),
+                    Err(e) => return Err(Error::ReadSourceDir(e)),
+                }
+            } else {
+                let path = src
+                    .strip_prefix(&base_source_path)
+                    .map_err(Error::RemoveSourcePrefix)?;
+
+                printfmt!("Source", path.display());
+
+                let mut source = fs::read_to_string(&src).map_err(Error::ReadSource)?;
+
+                if minify {
+                    source = crate::minify::minify(&source).map_err(Error::MinifySource)?;
+                }
+
+                package.files.insert(
+                    path.to_string_lossy().to_string(),
+                    File {
+                        digest: hex::encode(sha2::Sha256::digest(
+                            source.bytes().collect::<Vec<u8>>(),
+                        )),
+                        content: source,
+                    },
+                );
             }
-        } else {
-            let path = src
-                .strip_prefix(&base_source_path)
-                .map_err(Error::RemoveSourcePrefix)?;
-
-            printfmt!("Source", path.display());
-
-            let mut source = fs::read_to_string(&src).map_err(Error::ReadSource)?;
-
-            if minify {
-                source = crate::minify::minify(&source).map_err(Error::MinifySource)?;
-            }
-
-            package.files.insert(
-                path.to_string_lossy().to_string(),
-                File {
-                    digest: hex::encode(sha2::Sha256::digest(source.bytes().collect::<Vec<u8>>())),
-                    content: source,
-                },
-            );
         }
+        println!();
     }
-    println!();
 
     let file = format!("{}.{}.ccp", name, package.manifest.version);
 
