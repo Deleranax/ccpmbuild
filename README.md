@@ -1,13 +1,16 @@
-# ccpmbuild 
+# ccpmbuild
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Rust 2024](https://img.shields.io/badge/rust-2024%20edition-f74c00.svg?logo=rust&logoColor=white)](https://www.rust-lang.org)
+[![Rust 2024](https://img.shields.io/badge/Rust-2024%20edition-f74c00.svg?logo=rust&logoColor=white)](https://www.rust-lang.org)
 [![Built for CCPM](https://img.shields.io/badge/Built%20for-CCPM-orange.svg)](https://github.com/deleranax/ccpm)
-[![Container Image](https://img.shields.io/badge/container-ghcr.io-0db7ed.svg?logo=docker&logoColor=white)](https://ghcr.io/deleranax/ccpmbuild)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Deleranax/ccpmbuild/ci.yml?branch=main&label=build)](https://github.com/deleranax/ccpmbuild/actions)
+[![Container Image](https://img.shields.io/badge/Container-ghcr.io-0db7ed.svg?logo=docker&logoColor=white)](https://ghcr.io/deleranax/ccpmbuild)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Deleranax/ccpmbuild/build.yml?branch=main&label=Build)](https://github.com/Deleranax/ccpmbuild/actions)
 
-A powerful build tool and repository management system for [ComputerCraft Package Manager (CCPM)](https://github.com/deleranax/ccpm), written in Rust.
+A powerful build tool and repository management system
+for [ComputerCraft Package Manager (CCPM)](https://github.com/deleranax/ccpm), written in Rust.
 
-**ccpmbuild** processes CCPM package repositories by compressing packages, generating metadata, and creating distribution-ready package pools with automatic indexing.
+**ccpmbuild** processes CCPM package repositories by compressing packages, generating metadata, and creating
+distribution-ready package pools with automatic indexing.
 
 ## Features
 
@@ -32,6 +35,7 @@ Download the latest release for your platform from the [releases page](https://g
 - Windows (ARM64): `ccpmbuild-aarch64-pc-windows-msvc.exe`
 
 Make the binary executable (Linux):
+
 ```bash
 chmod +x ccpmbuild-*
 sudo mv ccpmbuild-* /usr/local/bin/ccpmbuild
@@ -40,11 +44,13 @@ sudo mv ccpmbuild-* /usr/local/bin/ccpmbuild
 ### Container Image
 
 Pull the latest container image:
+
 ```bash
 docker pull ghcr.io/deleranax/ccpmbuild:latest
 ```
 
 Or use with Podman:
+
 ```bash
 podman pull ghcr.io/deleranax/ccpmbuild:latest
 ```
@@ -52,6 +58,7 @@ podman pull ghcr.io/deleranax/ccpmbuild:latest
 ### Build from Source
 
 Requirements:
+
 - Rust 2024 edition or later
 - Cargo
 
@@ -103,12 +110,15 @@ docker run --rm -v $(pwd):/workspace ghcr.io/deleranax/ccpmbuild:latest build --
 ## Setting Up a CCPM Repository
 
 For detailed instructions on creating and hosting your own CCPM repository, including:
+
 - Repository structure and manifest format
 - Package manifest requirements
 - CI/CD setup for various Git forges
 - Manual and automated deployment options
 
-Please refer to the **[Setting Up Your Own Repository](https://github.com/deleranax/ccpm#setting-up-your-own-repository-git-forges)** section in the CCPM documentation.
+Please refer to the *
+*[Setting Up Your Own Repository](https://github.com/deleranax/ccpm#setting-up-your-own-repository-git-forges)** section
+in the CCPM documentation.
 
 ### Quick Overview
 
@@ -188,15 +198,22 @@ git push origin dist
 Packages are built as `.ccp` files containing an intermediate JSON structure that is then compressed and encoded:
 
 **Intermediate JSON Structure:**
+
 ```json
 {
   "name": "package-name",
   "version": "1.0.0",
   "description": "Package description",
   "license": "GPL-3.0-or-later",
-  "authors": ["..."],
-  "maintainers": ["..."],
-  "dependencies": ["..."],
+  "authors": [
+    "..."
+  ],
+  "maintainers": [
+    "..."
+  ],
+  "dependencies": [
+    "..."
+  ],
   "files": {
     "path/to/file.lua": {
       "content": "file-content-string",
@@ -208,14 +225,16 @@ Packages are built as `.ccp` files containing an intermediate JSON structure tha
 
 **Package Processing Pipeline:**
 
-1. **File Processing**: Each file in the package is read and optionally minified (Lua files only, using [darklua](https://github.com/seaofvoices/darklua))
+1. **File Processing**: Each file in the package is read and optionally minified (Lua files only,
+   using [darklua](https://github.com/seaofvoices/darklua))
 2. **File Checksums**: A SHA256 hash (`digest`) is computed for each processed file
 3. **JSON Serialization**: The entire package structure (metadata + all files with their digests) is serialized to JSON
 4. **Compression**: The complete JSON is compressed using DEFLATE algorithm (libdeflate implementation)
 5. **Encoding**: The compressed binary data is base64-encoded
 6. **Package Checksum**: A SHA256 hash (`digest`) is computed for the final base64-encoded package
 
-The `.ccp` file contains the base64-encoded compressed JSON. The package checksum is stored in `index.json` for integrity verification during downloads.
+The `.ccp` file contains the base64-encoded compressed JSON. The package checksum is stored in `index.json` for
+integrity verification during downloads.
 
 ## Version Management
 
@@ -254,9 +273,11 @@ cargo run -- build --minify . .
 
 ## License
 
-This project is licensed under the **GNU General Public License v3.0 or later**. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the **GNU General Public License v3.0 or later**. See the [LICENSE](LICENSE) file for
+details.
 
 As per the GPL-3.0, you are free to use, modify, and distribute this software, but you must:
+
 - Provide the source code for any modifications
 - State the changes you have made
 - Include a copy of the GPL-3.0 license
@@ -269,5 +290,6 @@ As per the GPL-3.0, you are free to use, modify, and distribute this software, b
 ## Support
 
 For questions, issues, or support:
+
 - Open an issue on [GitHub](https://github.com/deleranax/ccpmbuild/issues)
 - See the [CCPM documentation](https://github.com/deleranax/ccpm)

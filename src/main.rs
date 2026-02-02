@@ -90,7 +90,16 @@ enum Command {
     /// Build the packages into a repository
     Build {
         /// Minify Lua source files
-        #[clap(short, long)]
+        ///
+        /// By default, the source files are minified as much as possible (remove all comments, all
+        /// useless whitespaces including new lines).
+        ///
+        /// However, you can add these flags in the source files to change this behavior:
+        /// - `--!no-minify`: Do not minify this source file (preserve readability)
+        /// - `--!preserve-lines`: Minify but preserve overall line structure (except empty lines)
+        /// - `--!preserve-lines-strict`: Minify but preserve exact line structure (retain the
+        ///   debugging information)
+        #[clap(short, long, verbatim_doc_comment)]
         minify: bool,
 
         /// Input directory containing the repository manifest and the packages source directory
